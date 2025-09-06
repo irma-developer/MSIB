@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Tugas Tabel Siti Irmawati</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+      }
+      table {
+        border-collapse: separate; /* penting supaya spacing jalan */
+        border-spacing: 4px; /* jarak antar sel */
+        width: 600px; /* untul ukuran sedang */
+        margin: 20px auto; /* biar di tengah */
+        font-size: 14px;
+        background: #fff;
+      }
+      th,
+      td {
+        border: 1px solid #444;
+        padding: 8px;
+        text-align: center;
+        background: #fafafa; /* biar ada efek kotak */
+      }
+      th {
+        background-color: #666;
+        color: white;
+      }
+      tfoot td {
+        background-color: #ccc;
+        font-weight: bold;
+        text-align: center;
+      }
+      h2 {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Jadwal Kuliah</h2>
+
+    <table>
+      <tr>
+        <th>HARI</th>
+        <th>JAM</th>
+        <th>MATA KULIAH</th>
+        <th>DOSEN</th>
+        <th>RUANGAN</th>
+      </tr>
+
+      <!--Untuk  tabeljadwal hari senin-->
+      <tr>
+        <td rowspan="2">SENIN</td>
+        <td>08.00 - 10.00</td>
+        <td>Kajian Islam</td>
+        <td>Ust. Anwar Nashidin, Lc.</td>
+        <td rowspan="2">Ruang Teori</td>
+      </tr>
+
+      <tr>
+        <td>10.00 - 12.00</td>
+        <td>Aplikasi Perkantoran</td>
+        <td>Drs. MGS Hendri, M.M</td>
+      </tr>
+
+      <!--untuk jadwal selasa-->
+      <tr>
+        <td rowspan="2">SELASA</td>
+        <td>08.00 - 10.00</td>
+        <td>Linux Fundamental</td>
+        <td>Henry Saptono, S.Si, M.Kom</td>
+        <td rowspan="4">Ruang I</td>
+      </tr>
+      <tr>
+        <td>10.00 - 12.00</td>
+        <td>Html, Css & Javascript</td>
+        <td>Sirojul Munir, S.Si, M.Kom</td>
+      </tr>
+
+      <!-- RABU -->
+      <tr>
+        <td rowspan="2">RABU</td>
+        <td>08.00 - 10.00</td>
+        <td>Basis Data</td>
+        <td>Sirojul Munir, S.Si, M.Kom</td>
+      </tr>
+      <tr>
+        <td>10.00 - 12.00</td>
+        <td>Algoritma dan Pemograman</td>
+        <td>Sirojul Munir, S.Si, M.Kom</td>
+      </tr>
+      <!-- untuk jadwal kamis -->
+      <tr>
+        <td rowspan="2">KAMIS</td>
+        <td>08.00 - 10.00</td>
+        <td>Kewirausahaan & Pengembangan Diri</td>
+        <td>Khoirul Umam, S.Pd</td>
+        <td rowspan="2">Ruang Teori</td>
+      </tr>
+      <tr>
+        <td>10.00 - 12.00</td>
+        <td>Bahasa Inggris</td>
+        <td>Drs. Mahfudz</td>
+      </tr>
+
+      <!-- footer -->
+      <tfoot>
+        <tr>
+          <td colspan="5">JADWAL DAPAT BERUBAH SEWAKTU-WAKTU</td>
+        </tr>
+      </tfoot>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CV – Siti Irmawati | STT Terpadu Nurul Fikri</title>
+    <style>
+      :root {
+        --bg: #0f172a;
+        --card: #111827;
+        --muted: #94a3b8;
+        --text: #e5e7eb;
+        --accent: #22d3ee;
+        --chip: #1f2937;
+        --border: #334155;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+        background: linear-gradient(135deg, #0b1220, #0f172a 40%, #0c2d36);
+        color: var(--text);
+      }
+
+      .container {
+        max-width: 980px;
+        margin: 32px auto;
+        padding: 24px;
+        display: grid;
+        gap: 24px;
+      }
+
+      .header {
+        display: grid;
+        grid-template-columns: 140px 1fr;
+        gap: 24px;
+        align-items: center;
+        background: color-mix(in srgb, var(--card) 90%, #000 10%);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      }
+
+      .avatar {
+        width: 140px;
+        height: 140px;
+        border-radius: 16px;
+        object-fit: cover;
+        border: 2px solid var(--border);
+      }
+
+      h1 {
+        font-size: clamp(26px, 4vw, 36px);
+        margin: 0 0 6px;
+        letter-spacing: 0.5px;
+      }
+
+      .sub {
+        color: var(--muted);
+        margin: 0;
+        font-size: 15px;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .chip {
+        padding: 6px 10px;
+        background: var(--chip);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        font-size: 13px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      @media (max-width: 780px) {
+        .header {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .avatar {
+          justify-self: center;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card {
+        background: color-mix(in srgb, var(--card) 92%, #000 8%);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 18px;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+      }
+
+      .card h2 {
+        font-size: 18px;
+        margin: 0 0 12px;
+        color: var(--accent);
+        letter-spacing: 0.6px;
+      }
+
+      .kv {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        gap: 10px 12px;
+        font-size: 15px;
+      }
+
+      .kv b {
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      .list {
+        display: grid;
+        gap: 10px;
+        padding-left: 18px;
+      }
+
+      .skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .badge {
+        background: #0b2532;
+        border: 1px solid #164e63;
+        color: #a5f3fc;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 13px;
+      }
+
+      .footer {
+        color: var(--muted);
+        text-align: center;
+        font-size: 13px;
+        margin-top: 8px;
+      }
+
+      .links {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .links a {
+        color: var(--text);
+        text-decoration: none;
+        border-bottom: 1px dashed var(--accent);
+      }
+
+      /* Print A4 friendly */
+      @media print {
+        body {
+          background: #fff;
+          color: #111;
+        }
+
+        .container {
+          margin: 0;
+          padding: 0;
+        }
+
+        .header,
+        .card {
+          box-shadow: none;
+          border-color: #ddd;
+        }
+
+        .links a {
+          color: #0645ad;
+          border: none;
+          text-decoration: underline;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <!-- HEADER -->
+      <section class="header">
+        <img class="avatar" src="Irma.jpg" alt="Foto Siti Irmawati" />
+        <div>
+          <h1>Siti Irmawati</h1>
+          <p class="sub">
+            Mahasiswa Sistem Informasi — STT Terpadu Nurul Fikri
+          </p>
+          <div class="chips">
+            <span class="chip">Problem Solving</span>
+            <span class="chip">Creative Thinking</span>
+            <span class="chip">Web Basics (HTML/CSS)</span>
+            <span class="chip">Organisasi & Teamwork</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid">
+        <!-- BIODATA LENGKAP -->
+        <article class="card">
+          <h2>Biodata Lengkap</h2>
+          <div class="kv">
+            <b>Nama</b><span>Siti Irmawati</span>
+            <b>Tempat, Tgl Lahir</b><span>Bogor, 08 November 2006</span>
+            <b>Alamat</b><span>KP. GUNUNGBONGKOK RT/RW 002/003 PASIRBUNCIR CARINGIN BOGOR</span>
+            <b>Email</b><span>sitiirmawatiirma39@gmail.com</span>
+            <b>Telepon</b><span>08315310793</span>
+            <b>Website/Portofolio</b><span>irma-developer.github.io/</span>
+            <b>LinkedIn</b><span>https://www.linkedin.com/in/siti-irmawati-704361293/</span>
+            <b>GitHub</b><span>https://github.com/irma-developer</span>
+          </div>
+        </article>
+
+        <!-- PENDIDIKAN & RINGKASAN -->
+        <article class="card">
+          <h2>Ringkasan</h2>
+          <p style="margin-top: 6px; line-height: 1.6">
+            Saya adalah mahasiswa Sistem Informasi Semester 5 yang mulai mendalami dunia web development. Sekarang fokus untuk belajar lebih dalam tentang Fullstack Web Developer. Punya pengalaman bekerja dalam tim lewat proyek kelompok pembelajaran, suka tantangan, dan senang mencari solusi kreatif. Terbuka untuk kesempatan proyek bersama atau kegiatan lainnya!
+          </p>
+          <h2 style="margin-top: 16px">Pendidikan</h2>
+          <ul class="list">
+            <li><b>STT Terpadu Nurul Fikri</b> — S1 Sistem Informasi 2023 – sekarang</li>
+            <li><b>SMA Harapan Bangsa</b> — IPA 2020 - 2023</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="grid">
+        <!-- KEAHLIAN -->
+        <article class="card">
+          <h2>Keahlian</h2>
+          <div class="skills" style="margin-top: 6px">
+            <span class="badge">HTML</span>
+            <span class="badge">CSS</span>
+            <span class="badge">Canva</span>
+            <span class="badge">Content Planning</span>
+            <span class="badge">Copywriting Dasar</span>
+          </div>
+        </article>
+
+        <!-- PENGALAMAN/ORGANISASI -->
+        <article class="card">
+          <h2>Pengalaman / Organisasi</h2>
+          <ul class="list">
+            <li><b>Content Creator (TikTok)</b> — Fokus konten produktivitas & edukasi (2025 – sekarang)</li>
+            <li><b>Panitia SERABI – IQF</b> — Divisi Acara (Ramadan 2025)</li>
+            <li><b>Social Media Specialist (freelance)</b> — Pembuatan ide & editing video promosi (2024)</li>
+            <li><b>Staff Event Multimedia Digital Engagement</b> — Mengatur Acara yang ada di Program kerja MUDENG (2025)</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="grid">
+        <!-- PROYEK / PRESTASI -->
+        <article class="card">
+          <h2>Proyek Pilihan</h2>
+          <ul class="list">
+            <li><b>SnackinAja</b> — Pengembangan Web brand camilan</li>
+            <li><b>Saling Silang</b> — Materi promosi & tagline komunitas (Design Figma UI/UX)</li>
+            <li><b>Kossify.id</b> — Konsep sistem informasi kost (Design Figma UI/UX)</li>
+          </ul>
+        </article>
+
+        <!-- KETERTARIKAN -->
+        <article class="card">
+          <h2>Minat</h2>
+          <div class="skills" style="margin-top: 6px">
+            <span class="badge">Produktivitas</span>
+            <span class="badge">UI Konten</span>
+            <span class="badge">Edukasi</span>
+            <span class="badge">Event Organizing</span>
+            <span class="badge">Floristry</span>
+          </div>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>Kontak</h2>
+        <div class="links" style="margin-top: 6px">
+          <a href="mailto:sitiirmawatiirma39@gmail.com">Email</a>
+          <a href="https://www.linkedin.com/in/siti-irmawati-704361293/">LinkedIn</a>
+          <a href="https://irma-developer.github.io/">My Portfolio</a>
+          <a href="https://lynk.id/growyuk">Lynkid</a>
+          <a href="https://github.com/irma-developer">GitHub</a>
+        </div>
+        <p class="footer">
+          CV_Siti Irmawati tugas LMS. CopyRight 2025
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

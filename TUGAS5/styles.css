@@ -1,0 +1,78 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f7f8fa;
+  color: #1f2937;
+  line-height: 1.6;
+  padding: 12px; /* jarak dari pinggir layar */
+}
+
+/* Kotak umum  */
+.box {
+  background: #fff;
+  border: 3px solid #cfcfcf; /* garis tebal abu*/
+  border-radius: 4px;
+  text-align: center;
+  padding: 16px;
+  font-weight: 700;
+  color: #2f7f2f; /* teks hijau  */
+  margin-bottom: 12px;
+}
+
+/* Header dan Nav */
+.header {
+  font-size: 24px;
+  padding: 18px;
+}
+.nav {
+  font-size: 22px;
+  padding: 16px;
+}
+
+/* Tiga kolom yang ada di tengah */
+.columns {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+/* Sidebar kiri, kanan dan main */
+.sidebar {
+  flex: 1; /* lebar sama untuk kiri & kanan */
+  min-height: 320px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+}
+
+.main {
+  flex: 2; /* tengah lebih lebar */
+  min-height: 320px;
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+}
+
+/* Footer */
+.footer {
+  font-size: 22px;
+  padding: 16px;
+}
+
+/* Responsif*/
+@media (max-width: 768px) {
+  .columns {
+    flex-direction: column;
+  }
+  .main,
+  .sidebar {
+    min-height: 200px;
+  }
+}

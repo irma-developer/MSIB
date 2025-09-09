@@ -1,0 +1,185 @@
+/* --- Dasar --- */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #222;
+  background: #f6f7f9;
+  line-height: 1.6;
+}
+
+/* --- Header --- */
+header {
+  background: linear-gradient(135deg, #2b7bbd, #7cc8f4);
+  color: #102a43;
+  text-align: center;
+  padding: 20px 10px;
+}
+header h1 {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+header p {
+  margin: 6px 0 0;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* --- Nav (nav.html) --- */
+body.navwrap {
+  background: #23384a;
+}
+.nav {
+  text-align: center;
+  padding: 12px 0;
+}
+.nav a {
+  color: #f2f5f7;
+  text-decoration: none;
+  margin: 0 14px;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+.nav a:hover {
+  text-decoration: underline;
+}
+
+/* --- Panel kiri/kanan --- */
+.card {
+  background: #fff;
+  border: 1px solid #e6e8ec;
+  border-radius: 10px;
+  padding: 14px;
+  margin: 10px;
+}
+.card h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e6e8ec;
+}
+
+/* daftar link */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.list li {
+  margin: 8px 0;
+}
+.list a {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: #1f2d3d;
+  text-decoration: none;
+  background: #f9fbfc;
+  border: 1px solid #e6e8ec;
+}
+.list a:hover {
+  background: #eef6ff;
+}
+
+/* right */
+.bg-soft {
+  background: #f8f0f4;
+}
+
+/* --- Home --- */
+.profile {
+  text-align: center;
+  padding: 28px 12px;
+  background: #f6f7f9;
+}
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #2b7bbd;
+}
+.name {
+  color: #1e2a36;
+  margin: 14px 0 6px;
+}
+.tagline {
+  color: #2b7bbd;
+  font-style: italic;
+}
+
+/* --- Gallery --- */
+.gallerywrap {
+  text-align: center;
+  padding: 16px;
+}
+.gallerywrap h2 {
+  color: #1e2a36;
+  margin: 8px 0 12px;
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 18px;
+  justify-items: center;
+  margin-top: 12px;
+}
+.gallery figure {
+  margin: 0;
+}
+.gallery img {
+  height: 80px;
+  border-radius: 8px;
+  border: 1px solid #e6e8ec;
+}
+.gallery figcaption {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #555;
+}
+
+/* --- Study --- */
+h2 {
+  color: #1e2a36;
+  text-align: center;
+  margin: 10px 0 14px;
+}
+.tablewrap {
+  padding: 20px;
+}
+table {
+  border-collapse: collapse;
+  width: 70%;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid #e6e8ec;
+  border-radius: 8px;
+  overflow: hidden;
+}
+th {
+  background: #4caf50;
+  color: #fff;
+  padding: 12px;
+  text-align: center;
+}
+td {
+  padding: 10px;
+  text-align: center;
+}
+tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/* --- Footer--- */
+.footer {
+  text-align: center;
+  padding: 14px;
+  color: #445;
+  background: #e9edf2;
+}
+

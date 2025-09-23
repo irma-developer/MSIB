@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <title>Tugas 5 JS - Manajemen Produk</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Manajemen Produk</h1>
+      <div class="header-note">
+        Event Listener • Destructuring • Spread • Rest Parameter
+      </div>
+
+      <!-- form tambah produk -->
+      <h3>Tambah Produk</h3>
+      <form id="formTambah">
+        <div class="row">
+          <input id="id" type="number" placeholder="ID" required />
+          <input id="nama" type="text" placeholder="Nama produk" required />
+        </div>
+        <input
+          id="harga"
+          type="number"
+          placeholder="Harga (contoh: 2500000)"
+          required
+        />
+        <button type="submit">Tambah</button>
+        <div id="msgTambah" class="muted"></div>
+      </form>
+
+      <!-- tabel produk -->
+      <h3>Daftar Produk</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nama</th>
+            <th>Harga</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

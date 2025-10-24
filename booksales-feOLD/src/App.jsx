@@ -1,4 +1,3 @@
-// src/App.jsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // LAYOUT
@@ -12,11 +11,13 @@ import Books from "./pages/public/books";
 import Login from "./pages/auth/login";
 import Register from "./pages/auth/register";
 
-// ADMIN LAYOUT & PAGES
-import AdminLayout from "./layouts/admin";
-import Dashboard from "./pages/admin/index.jsx";
+// ADMIN LAYOUT
+// ADMIN PAGES
+import AdminLayout from "./layouts/admin"; 
+import Dashboard from "./pages/admin";  // kalau file index.jsx, import folder saja
 import AdminBooks from "./pages/admin/books";
-import BookCreate from "./pages/admin/books/create";
+import BookCreate from "./pages/admin/books/create"; // pastikan file create.jsx memang ada
+
 
 export default function App() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
         {/* ADMIN */}
         <Route path="admin" element={<AdminLayout />}>
           <Route index element={<Dashboard />} />
+
           <Route path="books">
             <Route index element={<AdminBooks />} />
             <Route path="create" element={<BookCreate />} />

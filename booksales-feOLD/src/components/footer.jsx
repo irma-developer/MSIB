@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 export default function Footer() {
   return (
     <>
@@ -7,46 +5,46 @@ export default function Footer() {
         <div className="mx-auto max-w-screen-xl text-center">
           <ul className="flex flex-wrap justify-center items-center mb-6 text-gray-900 dark:text-white">
             <li>
-              <Link to="/about" className="mr-4 hover:underline md:mr-6">
+              <a href="#" className="mr-4 hover:underline md:mr-6 ">
                 About
-              </Link>
+              </a>
             </li>
             <li>
-              <Link to="/premium" className="mr-4 hover:underline md:mr-6">
+              <a href="#" className="mr-4 hover:underline md:mr-6">
                 Premium
-              </Link>
+              </a>
             </li>
             <li>
-              <Link to="/campaigns" className="mr-4 hover:underline md:mr-6">
+              <a href="#" className="mr-4 hover:underline md:mr-6 ">
                 Campaigns
-              </Link>
+              </a>
             </li>
             <li>
-              <Link to="/blog" className="mr-4 hover:underline md:mr-6">
+              <a href="#" className="mr-4 hover:underline md:mr-6">
                 Blog
-              </Link>
+              </a>
             </li>
             <li>
-              <Link to="/affiliate" className="mr-4 hover:underline md:mr-6">
+              <a href="#" className="mr-4 hover:underline md:mr-6">
                 Affiliate Program
-              </Link>
+              </a>
             </li>
             <li>
-              <Link to="/faqs" className="mr-4 hover:underline md:mr-6">
+              <a href="#" className="mr-4 hover:underline md:mr-6">
                 FAQs
-              </Link>
+              </a>
             </li>
             <li>
-              <Link to="/contact" className="mr-4 hover:underline md:mr-6">
+              <a href="#" className="mr-4 hover:underline md:mr-6">
                 Contact
-              </Link>
+              </a>
             </li>
           </ul>
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
             ©{" "}
-            <Link to="/about" className="hover:underline">
+            <a href="#" className="hover:underline">
               2025
-            </Link>
+            </a>
             . All Rights Reserved.
           </span>
         </div>

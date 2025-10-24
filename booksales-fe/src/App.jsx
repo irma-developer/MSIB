@@ -39,7 +39,14 @@ export default function App() {
             <Route index element={<AdminBooks />} />
             <Route path="create" element={<BookCreate />} />
           </Route>
+          
         </Route>
+
+        {/* AUTHORS */}
+
+
+        {/* GENRES */}
+
       </Routes>
     </BrowserRouter>
   );

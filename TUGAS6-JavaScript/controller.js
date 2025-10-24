@@ -40,3 +40,4 @@ const destroy = (email) => {
 };
 
 export { index, store, destroy };
+ 

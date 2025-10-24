@@ -11,8 +11,8 @@ export default function BookCreate() {
     title: "", // <-- harus string
     price: 0,
     stock: 0,
-    genre_id: "", // <-- tambahkan
-    author_id: "",
+    genre_id: 0, // <-- tambahkan
+    author_id: 0,
     cover_photo: null,
     description: "",
   });

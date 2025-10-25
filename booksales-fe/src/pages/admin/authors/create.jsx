@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createAuthor } from "../../../_service/authors"; // <— plural & nama tepat
+import { createAuthors } from "../../../_service/authors"; // <— plural & nama tepat
 
 export default function AuthorCreate() {
   const [name, setName] = useState("");
@@ -11,7 +11,7 @@ export default function AuthorCreate() {
     e.preventDefault();
     try {
       setLoading(true);
-      await createAuthor({ name });
+      await createAuthors({ name });
       alert("Author created!");
       navigate("/admin/authors");
     } catch (e) {

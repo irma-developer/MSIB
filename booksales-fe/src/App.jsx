@@ -17,6 +17,11 @@ import AdminLayout from "./layouts/admin";
 import Dashboard from "./pages/admin/index.jsx";
 import AdminBooks from "./pages/admin/books";
 import BookCreate from "./pages/admin/books/create";
+import AdminBooksEdit from "./pages/admin/books/edit";
+import AdminAuthors from "./pages/admin/authors";
+import AuthorCreate from "./pages/admin/authors/create";
+import AdminGenres from "./pages/admin/genres";
+import GenreCreate from "./pages/admin/genres/create";
 
 export default function App() {
   return (
@@ -38,15 +43,22 @@ export default function App() {
           <Route path="books">
             <Route index element={<AdminBooks />} />
             <Route path="create" element={<BookCreate />} />
+            <Route path=":edit/:id" element={<AdminBooksEdit />} />
           </Route>
-          
+
+          <Route path="authors">
+            <Route index element={<AdminAuthors />} />
+            <Route path="create" element={<AuthorCreate />} />
+          </Route>
+          <Route path="genres">
+            <Route index element={<AdminGenres />} />
+            <Route path="create" element={<GenreCreate />} />
+          </Route>
         </Route>
 
         {/* AUTHORS */}
 
-
         {/* GENRES */}
-
       </Routes>
     </BrowserRouter>
   );

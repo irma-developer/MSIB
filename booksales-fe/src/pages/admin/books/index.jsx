@@ -54,11 +54,16 @@ export default function AdminBooks() {
     // contoh: navigate(`/admin/books/${book.id}/edit`);
   };
 
-  const handleDelete = async (book) => {
-    console.log("Delete", book);
-    // contoh:
-    // await deleteBook(book.id);
-    // setBooks((prev) => prev.filter((b) => b.id !== book.id));
+  const handleDelete = async (id) => {
+      const confirmDelete = window.confirm("Are you sure you want to delete this book?");
+      if (confirmDelete) {
+        try {
+          await deleteBooks(id);
+          setBooks(books.filter((book) => book.id !== id));
+        } catch (error) {
+          console.error("Failed to delete book:", error);
+        }
+      }
   };
 
   return (
@@ -185,7 +190,7 @@ export default function AdminBooks() {
                                   to={`/admin/books/${book.id}/edit`}
                                   // kalau mau kirim data buku tanpa fetch lagi:
                                   state={{ book }}
-                                  onClick={() => setOpenDropdownId(null)}
+                                  onClick={() => handleEdit(book.id)}
                                   className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                                 >
                                   Edit
@@ -196,7 +201,7 @@ export default function AdminBooks() {
                                   to={`/admin/books/${book.id}/delete`}
                                   // opsional: kirim state buat halaman konfirmasi delete
                                   state={{ book }}
-                                  onClick={() => setOpenDropdownId(null)}
+                                  onClick={() => handleDelete(book.id)}
                                   className="block py-2 px-4 hover:bg-gray-100 text-red-600 dark:hover:bg-gray-600 dark:text-red-400"
                                 >
                                   Delete

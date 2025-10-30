@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h2 {
+            color: #2c3e50;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 20px;
+            justify-items: center;
+            margin-top: 20px;
+        }
+        .gallery figure {
+            margin: 0;
+            text-align: center;
+        }
+        .gallery img {
+            height: 80px; /* kecil */
+            border-radius: 8px;
+            box-shadow: 0px 3px 6px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+        .gallery img:hover {
+            transform: scale(1.1);
+        }
+        .gallery figcaption {
+            margin-top: 5px;
+            font-size: 12px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h2>Gallery</h2>
+    <div class="gallery">
+        <figure>
+            <img src="aku.jpeg" alt="Foto 1">
+            <figcaption>Irma</figcaption>
+        </figure>
+        <figure>
+            <img src="aku2.jpg" alt="Foto 2">
+            <figcaption>Irma2</figcaption>
+        </figure>
+        <figure>
+            <img src="aku3.jpg" alt="Foto 3">
+            <figcaption>Irma dan Teman</figcaption>
+        </figure>
+    </div>
+</body>
+</html>

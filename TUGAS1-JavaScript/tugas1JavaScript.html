@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tugas 1 - JavaScript: Luas Bangun Datar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f9;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .container {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap; /* biar tetap responsif */
+      margin-top: 20px;
+    }
+    .card {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      width: 280px;
+    }
+    h2 {
+      margin-top: 0;
+      color: #444;
+    }
+    input {
+      margin: 5px 0 10px;
+      padding: 6px;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    p {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tugas 1 – JavaScript</h1>
+  <p style="text-align:center;">Soal: Menghitung luas persegi panjang, bujur sangkar, dan segitiga.</p>
+
+  <div class="container">
+    <div class="card">
+      <h2>Persegi Panjang</h2>
+      Panjang: <input id="pp-panjang" type="number" value="10"><br>
+      Lebar: <input id="pp-lebar" type="number" value="5"><br>
+      <button onclick="hitungPersegiPanjang()">Hitung</button>
+      <p id="pp-hasil">Hasil: -</p>
+    </div>
+
+    <div class="card">
+      <h2>Bujur Sangkar (Persegi)</h2>
+      Sisi: <input id="ps-sisi" type="number" value="7"><br>
+      <button onclick="hitungPersegi()">Hitung</button>
+      <p id="ps-hasil">Hasil: -</p>
+    </div>
+
+    <div class="card">
+      <h2>Segitiga</h2>
+      Alas: <input id="sg-alas" type="number" value="8"><br>
+      Tinggi: <input id="sg-tinggi" type="number" value="6"><br>
+      <button onclick="hitungSegitiga()">Hitung</button>
+      <p id="sg-hasil">Hasil: -</p>
+    </div>
+  </div>
+
+  <script>
+    // Fungsi menghitung luas persegi panjang
+    function luasPersegiPanjang(p, l) {
+      return p * l;
+    }
+    function hitungPersegiPanjang() {
+      const p = parseFloat(document.getElementById('pp-panjang').value);
+      const l = parseFloat(document.getElementById('pp-lebar').value);
+      const hasil = luasPersegiPanjang(p, l);
+      document.getElementById('pp-hasil').innerText = "Hasil: " + hasil;
+      console.log("Luas Persegi Panjang:", hasil);
+    }
+
+    // Fungsi menghitung luas bujur sangkar
+    function luasPersegi(s) {
+      return s * s;
+    }
+    function hitungPersegi() {
+      const s = parseFloat(document.getElementById('ps-sisi').value);
+      const hasil = luasPersegi(s);
+      document.getElementById('ps-hasil').innerText = "Hasil: " + hasil;
+      console.log("Luas Persegi:", hasil);
+    }
+
+    // Fungsi menghitung luas segitiga
+    function luasSegitiga(a, t) {
+      return 0.5 * a * t;
+    }
+    function hitungSegitiga() {
+      const a = parseFloat(document.getElementById('sg-alas').value);
+      const t = parseFloat(document.getElementById('sg-tinggi').value);
+      const hasil = luasSegitiga(a, t);
+      document.getElementById('sg-hasil').innerText = "Hasil: " + hasil;
+      console.log("Luas Segitiga:", hasil);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sistem Manajemen Transportasi (OOP)</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 16px;
+        line-height: 1.5;
+      }
+      h1,
+      h2 {
+        margin: 12px 0;
+      }
+      form {
+        display: grid;
+        gap: 10px;
+        max-width: 680px;
+        margin: 12px 0 20px;
+      }
+      label {
+        display: grid;
+        gap: 6px;
+      }
+      input,
+      select,
+      button {
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+      }
+      button {
+        cursor: pointer;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 900px;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+      th {
+        background: #f3f4f6;
+        text-align: left;
+      }
+      .muted {
+        color: #666;
+        font-size: 12px;
+      }
+      .ok {
+        color: #065f46;
+      }
+      .err {
+        color: #991b1b;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Sistem Manajemen Transportasi (OOP)</h1>
+
+    <!-- form tambah pelanggan -->
+    <h2>Tambah Pelanggan</h2>
+    <form id="form-pelanggan">
+      <div class="row">
+        <label>Nama
+          <input type="text" id="nama" placeholder="cth: Budi" required />
+        </label>
+        <label>Nomor Telepon
+          <input
+            type="text"
+            id="hp"
+            placeholder="cth: 0812-xxxx-xxxx"
+            required
+          />
+        </label>
+      </div>
+      <button type="submit">Tambah</button>
+      <div id="info-pelanggan" class="muted"></div>
+    </form>
+
+    <!-- form catat sewa -->
+    <h2>Catat Penyewaan Kendaraan</h2>
+    <form id="form-sewa">
+      <div class="row">
+        <label>Pilih Pelanggan
+          <select id="pilihPelanggan" required></select>
+        </label>
+        <label>Jenis Kendaraan
+          <select id="jenis" required>
+            <option value="Mobil">Mobil</option>
+            <option value="Motor">Motor</option>
+          </select>
+        </label>
+      </div>
+      <div class="row">
+        <label>Merek
+          <input
+            type="text"
+            id="merek"
+            placeholder="cth: Toyota / Honda"
+            required
+          />
+        </label>
+        <label>Model
+          <input
+            type="text"
+            id="model"
+            placeholder="cth: Avanza / Vario"
+            required
+          />
+        </label>
+      </div>
+      <div class="row">
+        <label>No. Polisi (opsional)
+          <input type="text" id="nopol" placeholder="cth: B 1234 ABC" />
+        </label>
+        <div></div>
+      </div>
+      <button type="submit">Simpan Penyewaan</button>
+      <div id="info-sewa" class="muted"></div>
+    </form>
+
+    <!-- tabel aktif -->
+    <h2>Daftar Pelanggan Aktif (Sedang Menyewa)</h2>
+    <table id="tabel">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nama</th>
+          <th>Nomor Telepon</th>
+          <th>Kendaraan Disewa</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <p style="margin-top: 12px">
+      <button id="btn-hapus">Hapus Semua Data</button>
+    </p>
+
+    <script>
+      // OOP dasar untuk sistem rental
+      class Pelanggan {
+        constructor(nama, nomorTelepon) {
+          this.nama = nama;
+          this.nomorTelepon = nomorTelepon;
+          this.kendaraanDisewa = null;
+        }
+        sewaKendaraan(kendaraanStr) {
+          this.kendaraanDisewa = kendaraanStr;
+        }
+        sedangMenyewa() {
+          return this.kendaraanDisewa ? true : false;
+        }
+        get namaKendaraan() {
+          return this.kendaraanDisewa || "-";
+        }
+      }
+
+      class SistemRental {
+        constructor() {
+          this.pelanggan = [];
+        }
+        tambahPelanggan(nama, hp) {
+          // cek duplikat nama+hp
+          const ada = this.pelanggan.find(function (p) {
+            return p.nama === nama && p.nomorTelepon === hp;
+          });
+          if (ada) {
+            throw new Error("Pelanggan sudah ada");
+          }
+          const p = new Pelanggan(nama, hp);
+          this.pelanggan.push(p);
+          return p;
+        }
+        catatSewa(nama, kendaraanStr) {
+          const p = this.pelanggan.find(function (x) {
+            return x.nama === nama;
+          });
+          if (!p) throw new Error("Pelanggan tidak ditemukan");
+          if (p.sedangMenyewa()) throw new Error("Pelanggan ini masih menyewa");
+          p.sewaKendaraan(kendaraanStr);
+          return p;
+        }
+        aktif() {
+          return this.pelanggan.filter(function (p) {
+            return p.sedangMenyewa();
+          });
+        }
+      }
+
+      // penyimpanan lokal sederhana
+      var KEY = "srental_v1";
+
+      function simpan(sistem) {
+        var data = sistem.pelanggan.map(function (p) {
+          return {
+            nama: p.nama,
+            nomorTelepon: p.nomorTelepon,
+            kendaraanDisewa: p.kendaraanDisewa,
+          };
+        });
+        localStorage.setItem(KEY, JSON.stringify(data));
+      }
+
+      function muat() {
+        var raw = localStorage.getItem(KEY);
+        if (!raw) return [];
+        try {
+          var arr = JSON.parse(raw);
+          return arr.map(function (o) {
+            var p = new Pelanggan(o.nama, o.nomorTelepon);
+            p.kendaraanDisewa = o.kendaraanDisewa || null;
+            return p;
+          });
+        } catch (e) {
+          return [];
+        }
+      }
+
+      // inisialisasi DOM
+      var sistem = new SistemRental();
+      sistem.pelanggan = muat();
+
+      var tBody = document.querySelector("#tabel tbody");
+      var pilihPelanggan = document.getElementById("pilihPelanggan");
+      var formPelanggan = document.getElementById("form-pelanggan");
+      var formSewa = document.getElementById("form-sewa");
+      var infoPelanggan = document.getElementById("info-pelanggan");
+      var infoSewa = document.getElementById("info-sewa");
+      var btnHapus = document.getElementById("btn-hapus");
+
+      // render tabel aktif
+      function renderTabel() {
+        tBody.innerHTML = "";
+        var data = sistem.aktif();
+        for (var i = 0; i < data.length; i++) {
+          var p = data[i];
+          var tr = document.createElement("tr");
+          tr.innerHTML =
+            "<td>" +
+            (i + 1) +
+            "</td>" +
+            "<td>" +
+            p.nama +
+            "</td>" +
+            "<td>" +
+            p.nomorTelepon +
+            "</td>" +
+            "<td>" +
+            p.namaKendaraan +
+            "</td>";
+          tBody.appendChild(tr);
+        }
+      }
+
+      // refresh select pelanggan
+      function renderSelect() {
+        pilihPelanggan.innerHTML = "";
+        for (var i = 0; i < sistem.pelanggan.length; i++) {
+          var p = sistem.pelanggan[i];
+          var opt = document.createElement("option");
+          opt.value = p.nama; // pakai nama
+          opt.textContent =
+            p.nama +
+            " (" +
+            p.nomorTelepon +
+            ")" +
+            (p.sedangMenyewa() ? " MENYEWA" : "");
+          pilihPelanggan.appendChild(opt);
+        }
+      }
+
+      //  tambah pelanggan
+      formPelanggan.addEventListener("submit", function (e) {
+        e.preventDefault();
+        infoPelanggan.textContent = "";
+        var nama = document.getElementById("nama").value.trim();
+        var hp = document.getElementById("hp").value.trim();
+        if (!nama || !hp) {
+          infoPelanggan.textContent = "Nama & HP wajib diisi.";
+          infoPelanggan.className = "muted err";
+          return;
+        }
+        try {
+          sistem.tambahPelanggan(nama, hp);
+          simpan(sistem);
+          infoPelanggan.textContent = "Pelanggan ditambahkan.";
+          infoPelanggan.className = "muted ok";
+          formPelanggan.reset();
+          renderSelect();
+        } catch (err) {
+          infoPelanggan.textContent = err.message;
+          infoPelanggan.className = "muted err";
+        }
+      });
+
+      //  catat sewa
+      formSewa.addEventListener("submit", function (e) {
+        e.preventDefault();
+        infoSewa.textContent = "";
+        var nama = pilihPelanggan.value;
+        var jenis = document.getElementById("jenis").value;
+        var merek = document.getElementById("merek").value.trim();
+        var model = document.getElementById("model").value.trim();
+        var nopol = document.getElementById("nopol").value.trim();
+
+        if (!nama || !jenis || !merek || !model) {
+          infoSewa.textContent = "Data sewa belum lengkap.";
+          infoSewa.className = "muted err";
+          return;
+        }
+
+        var kStr =
+          jenis + " " + merek + " " + model + (nopol ? " (" + nopol + ")" : "");
+
+        try {
+          sistem.catatSewa(nama, kStr);
+          simpan(sistem);
+          infoSewa.textContent = "Penyewaan tersimpan.";
+          infoSewa.className = "muted ok";
+          formSewa.reset();
+          renderSelect();
+          renderTabel();
+        } catch (err) {
+          infoSewa.textContent = err.message;
+          infoSewa.className = "muted err";
+        }
+      });
+
+      // hapus semua data
+      btnHapus.addEventListener("click", function () {
+        if (!confirm("Yakin hapus semua data?")) return;
+        localStorage.removeItem(KEY);
+        sistem.pelanggan = [];
+        renderSelect();
+        renderTabel();
+      });
+
+      // awal
+      renderSelect();
+      renderTabel();
+    </script>
+  </body>
+</html>

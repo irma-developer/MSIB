@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tugas 2 – JavaScript: Data Pegawai</title>
+    <style>
+      :root {
+        --bg: #f7f7fb;
+        --ink: #111827;
+        --muted: #6b7280;
+        --card: #ffffff;
+        --line: #e5e7eb;
+      }
+      body {
+        font-family: system-ui, Arial, sans-serif;
+        background: var(--bg);
+        padding: 24px;
+        color: var(--ink);
+      }
+      h1 {
+        margin: 0 0 16px;
+      }
+      .panel {
+        max-width: 760px;
+        background: var(--card);
+        padding: 20px; 
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        margin: 0 0 20px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 28px; 
+        row-gap: 14px; 
+      }
+      label {
+        font-size: 12px;
+        color: var(--muted);
+        display: block;
+        margin-bottom: 6px;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        font: inherit;
+      }
+      table {
+        width: 100%;
+        max-width: 760px;
+        border-collapse: collapse;
+        background: #fff;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      }
+      thead th {
+        background: #111827;
+        color: #fff;
+        text-align: left;
+        padding: 12px;
+      }
+      tbody td,
+      tfoot td {
+        border-top: 1px solid var(--line);
+        padding: 10px 12px;
+      }
+      tfoot td {
+        font-weight: 700;
+        background: #fafafa;
+      }
+      .right {
+        text-align: right;
+      }
+      .muted {
+        color: #6b7280;
+        font-weight: 400;
+      }
+      .row {
+        display: flex;
+        gap: 12px; 
+        align-items: end;
+        margin-top: 12px;
+      }
+      button {
+        padding: 10px 14px;
+        border: 1px solid var(--line);
+        background: #111827;
+        color: #fff;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      button.secondary {
+        background: #fff;
+        color: #111827;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Data Pegawai</h1>
+
+    <!-- FORM INPUT -->
+    <div class="panel" aria-label="Form Input Pegawai">
+      <div class="grid">
+        <div>
+          <label for="nama">Nama Pegawai</label>
+          <input
+            id="nama"
+            type="text"
+            placeholder="Dodi Prayodi"
+            value="Dodi Prayodi"/>
+        </div>
+        <div>
+          <label for="umur">Umur</label>
+          <input id="umur" type="number" min="16" max="70" value="25" />
+        </div>
+        <div>
+          <label for="jabatan">Jabatan</label>
+          <select id="jabatan">
+            <option>Manajer</option>
+            <option selected>Asisten Manajer</option>
+            <option>Staff</option>
+          </select>
+        </div>
+        <div>
+          <label for="status">Status</label>
+          <select id="status">
+            <option>Menikah</option>
+            <option selected>Belum Menikah</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <button id="hitung">Hitung & Tampilkan</button>
+        <button id="reset" class="secondary" type="button">
+          Reset Default
+        </button>
+      </div>
+    </div>
+
+    <!-- TABEL HASIL -->
+    <table aria-label="Tabel Data Pegawai">
+      <thead>
+        <tr>
+          <th>Nama Pegawai</th>
+          <th>Umur</th>
+          <th>Jabatan</th>
+          <th>Status</th>
+          <th class="right">Gaji Pokok</th>
+          <th class="right">Tunj. Jabatan (15%)</th>
+          <th class="right">BPJS (10%)</th>
+          <th class="right">
+            Tunj. Keluarga <span class="muted">(status menikah, 20%)</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody id="tbody-pegawai"></tbody>
+      <tfoot>
+        <tr>
+          <td colspan="7" class="right">Total Gaji</td>
+          <td class="right" id="total-gaji"></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <script>
+      // FORMAT RUPIAH
+      const rupiah = (n) =>
+        new Intl.NumberFormat("id-ID", {
+          style: "currency",
+          currency: "IDR",
+          maximumFractionDigits: 0,
+        }).format(n || 0);
+
+      // GAJI POKOK dengan IF
+      function hitungGapok(jabatan) {
+        const j = (jabatan || "").toLowerCase().trim();
+        if (j === "manajer") return 15_000_000;
+        else if (j === "asisten manajer" || j === "asisten-manajer")
+          return 10_000_000;
+        else if (j === "staff" || j === "staf") return 5_000_000;
+        return 0;
+      }
+
+      // Capitalize helper
+      const cap = (t) =>
+        (t || "")
+          .split(" ")
+          .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+          .join(" ");
+
+      // Render tabel
+      function render() {
+        const nama = document.getElementById("nama").value.trim() || "-";
+        const umur = parseInt(document.getElementById("umur").value, 10) || 0;
+        const jabatan = document.getElementById("jabatan").value;
+        const status = document.getElementById("status").value;
+
+        const gapok = hitungGapok(jabatan);
+        const tunjJabatan = 0.15 * gapok; // 15%
+        const bpjs = 0.1 * gapok; // 10%
+        const tunjKeluarga =
+          status.toLowerCase() === "menikah" ? 0.2 * gapok : 0; // ternary
+
+        const total = gapok + tunjJabatan + bpjs + tunjKeluarga;
+
+        const row = `
+      <tr>
+        <td>${cap(nama)}</td>
+        <td>${umur ? umur + " tahun" : "-"}</td>
+        <td>${cap(jabatan)}</td>
+        <td>${cap(status)}</td>
+        <td class="right">${rupiah(gapok)}</td>
+        <td class="right">${rupiah(tunjJabatan)}</td>
+        <td class="right">${rupiah(bpjs)}</td>
+        <td class="right">${rupiah(tunjKeluarga)}</td>
+      </tr>`;
+        document.getElementById("tbody-pegawai").innerHTML = row;
+        document.getElementById("total-gaji").textContent = rupiah(total);
+      }
+
+      // Event: tombol & auto-update saat input berubah
+      document.getElementById("hitung").addEventListener("click", render);
+      document
+        .querySelectorAll("#nama,#umur,#jabatan,#status")
+        .forEach((el) => el.addEventListener("input", render));
+      document
+        .querySelectorAll("#jabatan,#status")
+        .forEach((el) => el.addEventListener("change", render));
+
+      // Reset ke default contoh awal
+      document.getElementById("reset").addEventListener("click", () => {
+        document.getElementById("nama").value = "Dodi Prayodi";
+        document.getElementById("umur").value = 25;
+        document.getElementById("jabatan").value = "Asisten Manajer";
+        document.getElementById("status").value = "Belum Menikah";
+        render();
+      });
+
+      // Render pertama kali
+      render();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Layout dengan Frameset</title>
+</head>
+<frameset rows="15%,10%,*,10%" border="1">
+    <!-- Header -->
+    <frame src="header.html" name="header">
+
+    <!-- Navigation -->
+    <frame src="nav.html" name="nav">
+
+    <!-- Isi utama (3 kolom) -->
+    <frameset cols="20%,*,20%">
+        <frame src="left.html" name="left">
+        <frame src="home.html" name="main"> <!-- target link internal -->
+        <frame src="right.html" name="right">
+    </frameset>
+
+    <!-- Footer -->
+    <frame src="footer.html" name="footer">
+</frameset>
+</html>

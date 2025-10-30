@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pertemuan 6 JS</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background: #f9fafb;
+        line-height: 1.5;
+      }
+      h1 {
+        color: #1e3a8a;
+        margin-bottom: 12px;
+      }
+      h3 {
+        margin: 16px 0 8px;
+      }
+      .wrap {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .grid-4 {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+      }
+      input,
+      button {
+        padding: 8px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 14px;
+      }
+      button {
+        background: #2563eb;
+        color: #fff;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #1e40af;
+      }
+      .card {
+        background: #fff;
+        padding: 12px;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 12px;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+      th,
+      td {
+        border: 1px solid #e5e7eb;
+        padding: 8px;
+      }
+      th {
+        background: #2563eb;
+        color: #fff;
+      }
+      tr:nth-child(even) {
+        background: #f3f4f6;
+      }
+      .muted {
+        color: #6b7280;
+        font-size: 12px;
+      }
+      .actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .data-block {
+        margin-bottom: 12px;
+      }
+      .data-block .label {
+        font-weight: bold;
+        margin-bottom: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Data Mahasiswa (Pertemuan 6 JS)</h1>
+
+      <!-- Tambah 2 Data lewat Browser -->
+      <div class="card">
+        <h3>Tambah 2 Data Sekaligus</h3>
+
+        <!-- Data 1 -->
+        <div class="data-block">
+          <div class="label">Data 1</div>
+          <div class="grid-4">
+            <input id="n1" placeholder="Nama " />
+            <input id="u1" type="number" placeholder="Umur " />
+            <input id="a1" placeholder="Alamat " />
+            <input id="e1" placeholder="Email " />
+          </div>
+        </div>
+
+        <!-- Data 2 -->
+        <div class="data-block">
+          <div class="label">Data 2</div>
+          <div class="grid-4">
+            <input id="n2" placeholder="Nama " />
+            <input id="u2" type="number" placeholder="Umur " />
+            <input id="a2" placeholder="Alamat " />
+            <input id="e2" placeholder="Email " />
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="btnTambah2">Tambah 2 Data</button>
+          <span class="muted"
+            >*Tombol ini memanggil <code>store(obj1, obj2)</code> dan push minimal
+            2 data ✅</span
+          >
+        </div>
+        <div id="msgTambah" class="muted"></div>
+      </div>
+
+      <!-- Hapus data -->
+      <div class="card">
+        <h3>Hapus Data (berdasarkan email)</h3>
+        <div class="actions">
+          <input id="emailHapus" placeholder="Email yang dihapus" />
+          <button id="btnHapus">Hapus</button>
+        </div>
+        <div id="msgHapus" class="muted"></div>
+      </div>
+
+      <!-- Tabel data -->
+      <div class="card">
+        <h3>Daftar Data</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Nama</th>
+              <th>Umur</th>
+              <th>Alamat</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <script type="module">
+      import { index, store, destroy } from "./controller.js";
+
+      const el = (id) => document.getElementById(id);
+      const tbody = el("tbody");
+      const msgTambah = el("msgTambah");
+      const msgHapus = el("msgHapus");
+
+      function render() {
+        const rows = index();
+        tbody.innerHTML = rows
+          .map(
+            (r) => `
+        <tr>
+          <td>${r.no}</td>
+          <td>${r.nama}</td>
+          <td>${r.umur}</td>
+          <td>${r.alamat}</td>
+          <td>${r.email}</td>
+        </tr>
+      `
+          )
+          .join("");
+      }
+
+      // Tambah 2 data
+      el("btnTambah2").addEventListener("click", () => {
+        msgTambah.textContent = "";
+        const obj1 = {
+          nama: el("n1").value.trim(),
+          umur: Number(el("u1").value),
+          alamat: el("a1").value.trim(),
+          email: el("e1").value.trim(),
+        };
+        const obj2 = {
+          nama: el("n2").value.trim(),
+          umur: Number(el("u2").value),
+          alamat: el("a2").value.trim(),
+          email: el("e2").value.trim(),
+        };
+        try {
+          store(obj1, obj2);
+          msgTambah.textContent = "Berhasil menambah 2 data.";
+          ["n1", "u1", "a1", "e1", "n2", "u2", "a2", "e2"].forEach(
+            (id) => (el(id).value = "")
+          );
+          render();
+        } catch (err) {
+          msgTambah.textContent = err.message;
+        }
+      });
+
+      // Hapus data
+      el("btnHapus").addEventListener("click", () => {
+        msgHapus.textContent = "";
+        const email = el("emailHapus").value.trim();
+        if (!email) {
+          msgHapus.textContent = "Isi email yang mau dihapus.";
+          return;
+        }
+        const ok = destroy(email);
+        msgHapus.textContent = ok ? "Data dihapus." : "Email tidak ditemukan.";
+        el("emailHapus").value = "";
+        render();
+      });
+
+      render(); // render awal (10 data dari data.js)
+    </script>
+  </body>
+</html>
